@@ -28,6 +28,13 @@ python manage.py migrate
 python manage.py createsuperuser --username="admin" --email=""
 ```
 
+## Doc
+
+[inline-formsets](https://docs.djangoproject.com/en/3.2/topics/forms/modelforms/#inline-formsets)
+
+[Formulários dinâmicos com inlineformset_factory em uma aplicação Django](https://felipefrizzo.github.io/post/form-inline/)
+
+
 ## Passo a passo
 
 **Objetivo:** Nosso objetivo será inserir vários produtos numa ordem de compra. E veja o Admin.
