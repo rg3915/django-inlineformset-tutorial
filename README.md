@@ -5,7 +5,7 @@ Django inlineformset_factory + HTMX
 ## Este projeto foi feito com:
 
 * [Python 3.9.8](https://www.python.org/)
-* [Django 3.2.9](https://www.djangoproject.com/)
+* [Django 3.2.10](https://www.djangoproject.com/)
 * [Bootstrap 4.0](https://getbootstrap.com/)
 * [htmx 1.6.1](https://htmx.org/)
 

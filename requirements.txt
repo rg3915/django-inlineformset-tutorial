@@ -1,5 +1,6 @@
 dj-database-url==0.5.0
 django-extensions==3.1.5
+django-localflavor==3.1
 django-seed==0.3.1
 django-widget-tweaks==1.4.9
 Django==3.2.*

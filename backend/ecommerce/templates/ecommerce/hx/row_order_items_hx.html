@@ -1,0 +1,22 @@
+{% load widget_tweaks %}
+
+<div id="item-{{ forloop.counter0 }}" class="form-group">
+
+  <div class="form-group">
+    {% render_field order_item_form.order data-field='order' %}
+
+    <label>{{ order_item_form.product.label }}</label>
+    {% render_field order_item_form.product class="form-control" hx-get="/ecommerce/product/price/" hx-target="#id_price" hx-swap="outerHTML" data-field='product' %}
+
+    <label>{{ order_item_form.quantity.label }}</label>
+    {% render_field order_item_form.quantity class="form-control" data-field='quantity' %}
+
+    <label>{{ order_item_form.price.label }}</label>
+    {% render_field order_item_form.price class="form-control" data-field='price' %}
+  </div>
+
+  <span class="span-is-link no ml-2" onclick="removeRow()">
+    <i class="fa fa-times fa-lg"></i>
+  </span>
+
+</div>

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+  <div class="row">
+    <div class="col-auto">
+      <h1>
+        Ordens de Compra
+        <a class="btn btn-primary" href="{% url 'ecommerce:order_create' %}">Adicionar</a>
+      </h1>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nota Fiscal</th>
+        <th>Criado em</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="bookTbody">
+      {% for object in object_list %}
+        <tr class="bg-light">
+          <td>{{ object }}</td>
+          <td>{{ object.created|date:"d/m/Y H:i:s" }}</td>
+          <th>
+            <a class="btn btn-success" href="{% url 'ecommerce:order_update' object.pk %}">
+              <i class="fa fa-edit"></i> Editar
+            </a>
+          </th>
+        </tr>
+        <tr>
+          <th>Produto</th>
+          <th>Quantidade</th>
+          <th>Preço</th>
+        </tr>
+        {% for items in object.order_items.all %}
+          <tr>
+            <td>{{ items.product.title }}</td>
+            <td>{{ items.quantity }}</td>
+            <td>R$ <span class="float-right">{{ items.price }}</span></td>
+          </tr>
+        {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}
