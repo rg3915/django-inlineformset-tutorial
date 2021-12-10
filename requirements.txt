@@ -1,0 +1,8 @@
+dj-database-url==0.5.0
+django-extensions==3.1.5
+django-seed==0.3.1
+django-widget-tweaks==1.4.9
+Django==3.2.*
+Faker==10.0.0
+isort==5.10.1
+python-decouple==3.5
