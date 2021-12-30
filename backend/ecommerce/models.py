@@ -15,6 +15,11 @@ class Order(TimeStampedModel):
     def __str__(self):
         return self.nf
 
+    def get_total(self):
+        qs = self.order_items.filter(order=self.pk).values_list('price', 'quantity') or 0
+        t = 0 if isinstance(qs, int) else sum(map(lambda q: q[0] * q[1], qs))
+        return t
+
 
 class OrderItems(models.Model):
     order = models.ForeignKey(
@@ -41,3 +46,6 @@ class OrderItems(models.Model):
 
     def __str__(self):
         return f'{self.pk} - {self.order.pk} - {self.product}'
+
+    def get_subtotal(self):
+        return self.price * (self.quantity or 0)
