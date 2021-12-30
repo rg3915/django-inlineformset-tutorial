@@ -1,3 +1,8 @@
+(function() {
+  // Chama o método pra numerar os objetos ao carregar a página.
+  reorderItems()
+})();
+
 document.querySelector('#addItem').addEventListener('click', function() {
   setTimeout(() => {
     reorderItems()

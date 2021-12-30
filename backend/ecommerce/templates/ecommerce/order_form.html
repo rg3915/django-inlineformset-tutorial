@@ -59,17 +59,17 @@
             
             {% for order_item_form in formset %}
               <div id="item-{{ forloop.counter0 }}" class="form-group">
-                {{ order_item_form.order }}
+                {% render_field order_item_form.order data-field='order' %}
                 {{ order_item_form.id }}
 
                 {{ order_item_form.product.label }}
-                {% render_field order_item_form.product class="form-control" hx-get="/ecommerce/product/price/" hx-target="#id_items-0-price" hx-swap="outerHTML" %}
+                {% render_field order_item_form.product class="form-control" hx-get="/ecommerce/product/price/" hx-target="#id_price" hx-swap="outerHTML" data-field='product' %}
 
                 {{ order_item_form.quantity.label }}
-                {{ order_item_form.quantity }}
+                {% render_field order_item_form.quantity class="form-control" data-field='quantity' %}
 
                 {{ order_item_form.price.label }}
-                {{ order_item_form.price }}
+                {% render_field order_item_form.price class="form-control" data-field='price' %}
 
                 {% if order_item_form.id.value %}
                   <span
