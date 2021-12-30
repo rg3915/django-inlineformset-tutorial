@@ -35,6 +35,8 @@ class OrderItemsForm(forms.ModelForm):
         self.fields['id'].label = ''
         self.fields['id'].widget = forms.HiddenInput()
 
+        self.fields['price'].widget.attrs['step'] = 0.01
+
 
 OrderItemsFormset = inlineformset_factory(
     Order,
