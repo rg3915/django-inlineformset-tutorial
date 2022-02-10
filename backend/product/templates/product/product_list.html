@@ -1,41 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div>
-  <div class="row">
-    <div class="col-auto">
-      <h1>
-        Lista de Produtos
-        <a
-          href=""
-          class="btn btn-primary"
-          data-toggle="modal"
-          data-target="#addModal"
-          hx-get="{% url 'product:product_create' %}"
-          hx-target="#addContent"
-          hx-swap="innerHTML"
-        >Adicionar</a>
-      </h1>
+  <div>
+    <div class="row">
+      <div class="col-auto">
+        <h1>
+          Lista de Produtos
+          <a
+            href=""
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#addModal"
+            hx-get="{% url 'product:product_create' %}"
+            hx-target="#addContent"
+            hx-swap="innerHTML"
+          >Adicionar</a>
+        </h1>
+      </div>
     </div>
-  </div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Título</th>
-        <th>Preço</th>
-      </tr>
-    </thead>
-    <tbody id="productTbody">
-      {% for object in object_list %}
+    <table class="table">
+      <thead>
         <tr>
-          <td>{{ object.title }}</td>
-          <td>R$ <span class="float-right">{{ object.price }}</span></td>
+          <th>Título</th>
+          <th>Preço</th>
         </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody id="productTbody">
+        {% for object in object_list %}
+          <tr>
+            <td>{{ object.title }}</td>
+            <td>R$ <span class="float-right">{{ object.price }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-{% include "../includes/add_modal.html" %}
+  {% include "../includes/add_modal.html" %}
 
 {% endblock content %}
