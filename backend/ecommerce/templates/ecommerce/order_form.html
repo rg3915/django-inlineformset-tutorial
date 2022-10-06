@@ -26,25 +26,25 @@
         <legend class="legend">Ordem de compra</legend>
 
         <div class="row">
-          <div class="col-sm-6">
-            {% for field in form.visible_fields %}
-              <div class="form-group">
-                <label for="{{ field.id_for_label }}">
-                  {% if field.field.required %}
-                    <span class="required">{{ field.label }}</span>
+          <div class="col-sm-12">
+
+            <div class="form-inline">
+              <label> {{ form.nf.label }} </label>
+              {% render_field form.nf class="form-control" data-field="nf" %}
+
+              <label> {{ form.provider.label }} </label>
+              <select name="main-provider" class="form-control" data-field="provider">
+                <option>----------</option>
+                {% for provider in providers %}  
+                  {% if form.instance.provider == provider %}
+                    <option value="{{ provider.pk }}" selected>{{ provider }} </option>
                   {% else %}
-                    {{ field.label }}
+                    <option value="{{ provider.pk }}">{{ provider }}</option>
                   {% endif %}
-                </label>
-
-                {% render_field field class="form-control" %}
-
-                {% for error in field.errors %}
-                  <span class="text-muted">{{ error }}</span>
-                {% endfor %}
-              </div>
-            {% endfor %}
-
+                {% endfor %}  
+              </select>
+              
+            </div>
             {{ formset.management_form }}
 
           </div>
