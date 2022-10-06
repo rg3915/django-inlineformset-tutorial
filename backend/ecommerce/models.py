@@ -1,11 +1,17 @@
 from django.db import models
 
 from backend.core.models import TimeStampedModel
-from backend.product.models import Product
+from backend.product.models import Product, Provider
 
 
 class Order(TimeStampedModel):
     nf = models.CharField('nota fiscal', max_length=7, unique=True)
+    provider = models.ForeignKey(
+        Provider,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     class Meta:
         ordering = ('-pk',)
