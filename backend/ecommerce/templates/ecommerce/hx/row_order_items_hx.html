@@ -6,7 +6,8 @@
     {% render_field order_item_form.order data-field='order' %}
 
     <label>{{ order_item_form.product.label }}</label>
-    <select id="id_items-0-product" name="items-0-product" class="form-control" data-field="product"
+    <!-- the #'s below will be replaced via JS in the client -->
+    <select id="id_items-#-product" name="items-#-product" class="form-control" data-field="product"
             hx-get="/ecommerce/product/price/"
             hx-target="#id_price"
             hx-swap="outerHTML">

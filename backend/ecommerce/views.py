@@ -47,6 +47,16 @@ def add_row_order_items_hx(request):
     context = {'order_item_form': form, 'products':products}
     return render(request, template_name, context)
 
+def products_by_provider(request):
+    template_name = 'ecommerce/hx/products_select_hx.html'
+    url = request.get_full_path()
+    item = url.split('-')[1]
+    provider_pk = list(request.GET.values())[0]
+    products = Product.objects.filter(provider__id=provider_pk)
+
+    context = {'products': products, 'item': item[0]}
+    return render(request, template_name, context)
+
 
 def product_price(request):
     template_name = 'ecommerce/hx/product_price_hx.html'
