@@ -33,8 +33,8 @@
               {% render_field form.nf class="form-control" data-field="nf" %}
 
               <label> {{ form.provider.label }} </label>
-              <select name="main-provider" class="form-control" data-field="provider">
-                <option>----------</option>
+              <select id="main-provider" name="main-provider" class="form-control" data-field="provider">
+                <option value="0">----------</option>
                 {% for provider in providers %}  
                   {% if form.instance.provider == provider %}
                     <option value="{{ provider.pk }}" selected>{{ provider }} </option>
@@ -100,6 +100,7 @@
           hx-get="{% url 'ecommerce:add_row_order_items_hx' %}"
           hx-target="#order"
           hx-swap="beforeend"
+          hx-include="[name=main-provider]"
         >
           <i class="fa fa-plus"></i>
           Adicionar

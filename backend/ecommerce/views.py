@@ -1,3 +1,4 @@
+import logging
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views.generic import ListView
@@ -33,7 +34,17 @@ def order_create(request):
 def add_row_order_items_hx(request):
     template_name = 'ecommerce/hx/row_order_items_hx.html'
     form = OrderItemsForm()
-    context = {'order_item_form': form}
+
+    products = Product.objects.all()
+    try:
+        provider = request.GET['main-provider']
+        provider = int(provider)
+        if provider:
+            products = products.filter(provider__id=provider)
+    except ValueError:
+        logging.info('Valor inválido para main-provider')
+    
+    context = {'order_item_form': form, 'products':products}
     return render(request, template_name, context)
 
 
