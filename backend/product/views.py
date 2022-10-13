@@ -8,6 +8,8 @@ from .models import Product
 
 
 class ProductTable(tables.Table):
+    title = tables.Column(linkify=True)  
+
     class Meta:
         model = Product
         fields = ("title", "price")
