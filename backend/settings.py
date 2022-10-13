@@ -21,6 +21,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'widget_tweaks',
     'django_seed',
+    'django_tables2',
     # my apps
     'backend.accounts.apps.AccountsConfig',
     'backend.core.apps.CoreConfig',

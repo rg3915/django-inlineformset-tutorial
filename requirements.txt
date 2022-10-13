@@ -7,3 +7,4 @@ Django==3.2.*
 Faker==10.0.0
 isort==5.10.1
 python-decouple==3.5
+django-tables2==2.4.1
