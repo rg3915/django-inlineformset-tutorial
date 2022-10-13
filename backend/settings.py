@@ -121,3 +121,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = '/admin/login/'
 LOGIN_REDIRECT_URL = 'core:index'
 # LOGOUT_REDIRECT_URL = 'core:index'
+
+# django-table2 https://pypi.org/project/django-tables2/
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap4.html"
