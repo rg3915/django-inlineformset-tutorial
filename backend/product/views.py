@@ -1,12 +1,23 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
+import django_tables2 as tables
+
 from .forms import ProductForm
 from .models import Product
 
 
-class ProductListView(ListView):
+class ProductTable(tables.Table):
+    class Meta:
+        model = Product
+        template_name = "django_tables2/bootstrap4.html"
+        fields = ("title", "price")
+        per_page = 10
+
+
+class ProductListView(tables.SingleTableView):
     model = Product
+    table_class = ProductTable
 
 
 def product_create(request):
