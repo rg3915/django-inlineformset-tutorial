@@ -9,6 +9,7 @@ urlpatterns = [
     path('create/', v.order_create, name='order_create'),
     path('add-row/', v.add_row_order_items_hx, name='add_row_order_items_hx'),
     path('product/price/', v.product_price, name='product_price'),
+    path('product/filter_by_provider/', v.products_by_provider, name='products_by_provider'),
     path('<int:pk>/update/', v.order_update, name='order_update'),
     path('order-item/<int:pk>/delete/', v.order_item_delete, name='order_item_delete'),
 ]

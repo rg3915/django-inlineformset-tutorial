@@ -8,10 +8,10 @@ class OrderForm(forms.ModelForm):
     required_css_class = 'required'
 
     nf = forms.IntegerField(label="Nota Fiscal")
-
+    
     class Meta:
         model = Order
-        fields = ('nf',)
+        fields = ('nf', 'provider')
 
 
 class OrderItemsForm(forms.ModelForm):
@@ -44,6 +44,6 @@ OrderItemsFormset = inlineformset_factory(
     form=OrderItemsForm,
     extra=0,
     can_delete=False,
-    min_num=1,
+    min_num=0,
     validate_min=True,
 )
