@@ -29,11 +29,12 @@
           <div class="col-sm-12">
 
             <div class="form-inline">
+
               <label> {{ form.nf.label }} </label>
-              {% render_field form.nf class="form-control" data-field="nf" %}
+              {% render_field form.nf class="form-control" %}
 
               <label> {{ form.provider.label }} </label>
-              <select id="main-provider" name="main-provider" class="form-control" data-field="provider" 
+              <select id="main-provider" name="main-provider" class="form-control"
                       hx-get="/ecommerce/product/filter_by_provider/"
                       hx-target="[data-field=product]"
                       hx-swap="outerHTML"
@@ -49,10 +50,11 @@
                   {% else %}
                     <option value="{{ provider.pk }}">{{ provider }}</option>
                   {% endif %}
-                {% endfor %}  
+                {% endfor %}
               </select>
-              
+
             </div>
+
             {{ formset.management_form }}
 
           </div>
@@ -67,17 +69,18 @@
 
               {% for order_item_form in formset %}
                 <div id="item-{{ forloop.counter0 }}" class="form-group">
-                  {% render_field order_item_form.order data-field='order' %}
-                  {{ order_item_form.id }}
+                  {% render_field order_item_form.order %}
+
+                  {% render_field order_item_form.id %}
 
                   {{ order_item_form.product.label }}
-                  {% render_field order_item_form.product class="form-control product" hx-get="/ecommerce/product/price/" hx-target="#id-price" hx-swap="outerHTML" data-field="product" %}
+                  {% render_field order_item_form.product class="form-control product" hx-get="/ecommerce/product/price/" hx-target="#id-price" hx-swap="outerHTML" %}
 
                   {{ order_item_form.quantity.label }}
-                  {% render_field order_item_form.quantity class="form-control" data-field='quantity' %}
+                  {% render_field order_item_form.quantity class="form-control" %}
 
                   {{ order_item_form.price.label }}
-                  {% render_field order_item_form.price class="form-control" data-field='price' %}
+                  {% render_field order_item_form.price class="form-control" %}
 
                   {% if order_item_form.id.value %}
                     <span

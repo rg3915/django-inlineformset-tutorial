@@ -3,11 +3,11 @@
 <div id="item-{{ forloop.counter0 }}" class="form-group">
 
   <div class="form-group">
-    {% render_field order_item_form.order data-field='order' %}
+    {% render_field order_item_form.order %}
 
     <label>{{ order_item_form.product.label }}</label>
     <!-- the #'s below will be replaced via JS in the client -->
-    <select id="id_items-#-product" name="items-#-product" class="form-control" data-field="product"
+    <select id="id_items-#-product" name="items-#-product" class="form-control"
             hx-get="/ecommerce/product/price/"
             hx-target="#id_price"
             hx-swap="outerHTML">
@@ -22,10 +22,10 @@
     </select>
 
     <label>{{ order_item_form.quantity.label }}</label>
-    {% render_field order_item_form.quantity class="form-control" data-field='quantity' %}
+    {% render_field order_item_form.quantity class="form-control" %}
 
     <label>{{ order_item_form.price.label }}</label>
-    {% render_field order_item_form.price class="form-control" data-field='price' %}
+    {% render_field order_item_form.price class="form-control" %}
   </div>
 
   <span class="span-is-link no ml-2" onclick="removeRow()">
