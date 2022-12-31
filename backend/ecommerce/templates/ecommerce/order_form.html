@@ -29,11 +29,12 @@
           <div class="col-sm-12">
 
             <div class="form-inline">
+
               <label> {{ form.nf.label }} </label>
-              {% render_field form.nf class="form-control" data-field="nf" %}
+              {% render_field form.nf class="form-control" %}
 
               <label> {{ form.provider.label }} </label>
-              <select id="main-provider" name="main-provider" class="form-control" data-field="provider" 
+              <select id="main-provider" name="main-provider" class="form-control"
                       hx-get="/ecommerce/product/filter_by_provider/"
                       hx-target="[data-field=product]"
                       hx-swap="outerHTML"
@@ -49,10 +50,11 @@
                   {% else %}
                     <option value="{{ provider.pk }}">{{ provider }}</option>
                   {% endif %}
-                {% endfor %}  
+                {% endfor %}
               </select>
-              
+
             </div>
+
             {{ formset.management_form }}
 
           </div>
@@ -67,17 +69,18 @@
 
               {% for order_item_form in formset %}
                 <div id="item-{{ forloop.counter0 }}" class="form-group">
-                  {% render_field order_item_form.order data-field='order' %}
-                  {{ order_item_form.id }}
+                  {% render_field order_item_form.order data-field="order" %}
+
+                  {% render_field order_item_form.id data-field="id" %}
 
                   {{ order_item_form.product.label }}
-                  {% render_field order_item_form.product class="form-control product" hx-get="/ecommerce/product/price/" hx-target="#id-price" hx-swap="outerHTML" data-field="product" %}
+                  {% render_field order_item_form.product class="form-control product" hx-get="/ecommerce/product/price/" hx-target="#id_items-0-price" hx-swap="outerHTML" %}
 
                   {{ order_item_form.quantity.label }}
-                  {% render_field order_item_form.quantity class="form-control" data-field='quantity' %}
+                  {% render_field order_item_form.quantity class="form-control" %}
 
                   {{ order_item_form.price.label }}
-                  {% render_field order_item_form.price class="form-control" data-field='price' %}
+                  {% render_field order_item_form.price class="form-control" %}
 
                   {% if order_item_form.id.value %}
                     <span
@@ -148,7 +151,20 @@
 
 {% block js %}
 
-  <script src="{% static 'js/main.js' %}"></script>
+  <script
+    src="{% static 'js/main.js' %}"
+    defer
+    data-user="{{ request.user }}"
+    data-buttonadd="#addItem"
+    data-divitems="order"
+    data-main="order"
+    data-fields="{{ formset_fields }}"
+  ></script>
+  <!--
+  divitems="order"                É o id dos campos do inlineform.
+  main="order"                    É o nome do campo FK do model OrderItems, ou seja, order é FK para Order.
+  fields="{{ formset_fields }}"   Lista com o nome dos campos do inlineform.
+  -->
 
   <script>
     // Necessário por causa do delete

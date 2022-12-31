@@ -1,3 +1,4 @@
+import json
 import logging
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -20,6 +21,12 @@ def order_create(request):
     form = OrderForm(request.POST or None, instance=order_instance, prefix='main')
     formset = OrderItemsFormset(request.POST or None, instance=order_instance, prefix='items')
 
+    lista = [f.fields for f in formset][0]  # dict_keys
+    *formset_fields, = lista  # transforma dict_keys em lista
+
+    if 'id' in formset_fields:
+        formset_fields.remove('id')
+
     if request.method == 'POST':
         if form.is_valid() and formset.is_valid():
             form.save()
@@ -27,7 +34,12 @@ def order_create(request):
             return redirect('ecommerce:order_list')
 
     providers = Provider.objects.all()
-    context = {'form': form, 'formset': formset, 'providers':providers}
+    context = {
+        'form': form,
+        'formset': formset,
+        'providers': providers,
+        'formset_fields': json.dumps(formset_fields)
+    }
     return render(request, template_name, context)
 
 
@@ -43,9 +55,10 @@ def add_row_order_items_hx(request):
             products = products.filter(provider__id=provider)
     except ValueError:
         logging.info('Valor inválido para main-provider')
-    
-    context = {'order_item_form': form, 'products':products}
+
+    context = {'order_item_form': form, 'products': products}
     return render(request, template_name, context)
+
 
 def products_by_provider(request):
     template_name = 'ecommerce/hx/products_select_hx.html'
@@ -87,7 +100,7 @@ def order_update(request, pk):
             return redirect('ecommerce:order_list')
 
     providers = Provider.objects.all()
-    context = {'form': form, 'formset': formset, 'providers':providers}
+    context = {'form': form, 'formset': formset, 'providers': providers}
     return render(request, template_name, context)
 
 

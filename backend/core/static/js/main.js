@@ -1,9 +1,16 @@
-(function() {
-  // Chama o método pra numerar os objetos ao carregar a página.
-  reorderItems()
-})();
+const data = document.currentScript.dataset
+const user = data.user
+const buttonAdd = data.buttonadd
+const main = data.main
+const divitems = data.divitems
+const fields = JSON.parse(data.fields.replace(/'/g, '"'))
 
-document.querySelector('#addItem').addEventListener('click', function() {
+// (function() {
+//   // Chama o método pra numerar os objetos ao carregar a página.
+//   reorderItems()
+// })();
+
+document.querySelector(buttonAdd).addEventListener('click', function() {
   setTimeout(() => {
     reorderItems()
   }, 500)
@@ -14,30 +21,29 @@ function reorderItems() {
     .forEach((item, i) => {
       item.setAttribute('id', 'item-' + i)
 
-      if (!item.querySelector('[data-field="order"]')) {
+      if (!item.querySelector('[data-field="' + main + '"]')) {
         return
       }
 
-      item.querySelector('[data-field="order"]').setAttribute('name', 'items-' + i + '-order')
-      item.querySelector('[data-field="order"]').setAttribute('id', 'id_items-' + i + '-order')
-
-      item.querySelector('[data-field="product"]').setAttribute('name', 'items-' + i + '-product')
-      item.querySelector('[data-field="product"]').setAttribute('hx-target', '#id_items-'+ i +'-price')
-
-      item.querySelector('[data-field="quantity"]').setAttribute('name', 'items-' + i + '-quantity')
-
-      item.querySelector('[data-field="price"]').setAttribute('name', 'items-' + i + '-price')
-      item.querySelector('[data-field="price"]').setAttribute('id', 'id_items-' + i + '-price')
+      fields.forEach((field) => {
+        item.querySelector('[data-field="' + field + '"]').setAttribute('name', 'items-' + i + '-' + field)
+        item.querySelector('[data-field="' + field + '"]').setAttribute('id', 'id_items-' + i + '-' + field)
+        if (field == 'product') {
+          item.querySelector('[data-field="' + field + '"]').setAttribute('hx-get', '/ecommerce/product/price/')
+          item.querySelector('[data-field="' + field + '"]').setAttribute('hx-target', '#id_items-'+ i + '-price')
+          item.querySelector('[data-field="' + field + '"]').setAttribute('hx-swap', 'outerHTML')
+        }
+      })
   })
 
   Array.from(document.querySelectorAll("#id_id"))
     .forEach((item, i) => item.setAttribute('name', 'items-' + (i + 1) + '-id'))
 
-  let totalItems = $('#order').children().length
+  let totalItems = document.getElementById(divitems).querySelectorAll("[id^='item-']").length
   document.querySelector('#id_items-TOTAL_FORMS').value = totalItems
 
   // htmx.org/api/#process
-  htmx.process(document.querySelector("#order"))
+  htmx.process(document.getElementById(divitems))
 }
 
 function removeRow() {
