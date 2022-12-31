@@ -69,12 +69,12 @@
 
               {% for order_item_form in formset %}
                 <div id="item-{{ forloop.counter0 }}" class="form-group">
-                  {% render_field order_item_form.order %}
+                  {% render_field order_item_form.order data-field="order" %}
 
-                  {% render_field order_item_form.id %}
+                  {% render_field order_item_form.id data-field="id" %}
 
                   {{ order_item_form.product.label }}
-                  {% render_field order_item_form.product class="form-control product" hx-get="/ecommerce/product/price/" hx-target="#id-price" hx-swap="outerHTML" %}
+                  {% render_field order_item_form.product class="form-control product" hx-get="/ecommerce/product/price/" hx-target="#id_items-0-price" hx-swap="outerHTML" %}
 
                   {{ order_item_form.quantity.label }}
                   {% render_field order_item_form.quantity class="form-control" %}
@@ -151,7 +151,20 @@
 
 {% block js %}
 
-  <script src="{% static 'js/main.js' %}"></script>
+  <script
+    src="{% static 'js/main.js' %}"
+    defer
+    data-user="{{ request.user }}"
+    data-buttonadd="#addItem"
+    data-divitems="order"
+    data-main="order"
+    data-fields="{{ formset_fields }}"
+  ></script>
+  <!--
+  divitems="order"                É o id dos campos do inlineform.
+  main="order"                    É o nome do campo FK do model OrderItems, ou seja, order é FK para Order.
+  fields="{{ formset_fields }}"   Lista com o nome dos campos do inlineform.
+  -->
 
   <script>
     // Necessário por causa do delete

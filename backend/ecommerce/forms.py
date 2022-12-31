@@ -53,6 +53,6 @@ OrderItemsFormset = inlineformset_factory(
     form=OrderItemsForm,
     extra=0,
     can_delete=False,
-    min_num=0,
+    min_num=1,
     validate_min=True,
 )
