@@ -11,10 +11,5 @@ class OrderItemsInline(admin.TabularInline):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     inlines = (OrderItemsInline,)
-    list_display = ('__str__', 'nf',)
+    list_display = ('__str__', 'nf', 'provider')
     search_fields = ('nf',)
-
-
-@admin.register(OrderItems)
-class OrderItemsAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'quantity', 'price')

@@ -49,6 +49,8 @@ class OrderItems(models.Model):
 
     class Meta:
         ordering = ('pk',)
+        verbose_name = 'ordem itens'
+        verbose_name_plural = 'ordem itens'
 
     def __str__(self):
         return f'{self.pk} - {self.order.pk} - {self.product}'
