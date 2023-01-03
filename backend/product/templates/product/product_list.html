@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% load render_table from django_tables2 %}
 
 {% block content %}
   <div>
@@ -20,8 +19,23 @@
       </div>
     </div>
 
-    {% render_table table %}
-  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Preço</th>
+        </tr>
+      </thead>
+      <tbody id="productTbody">
+        {% for object in object_list %}
+          <tr>
+            <td>{{ object.title }}</td>
+            <td>R$ <span class="float-right">{{ object.price }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
   </div>
 
   {% include "../includes/add_modal.html" %}
