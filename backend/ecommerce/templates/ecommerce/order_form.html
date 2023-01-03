@@ -35,16 +35,16 @@
 
               <label> {{ form.provider.label }} </label>
               <select id="main-provider" name="main-provider" class="form-control"
-                      hx-get="/ecommerce/product/filter_by_provider/"
-                      hx-target="[data-field=product]"
-                      hx-swap="outerHTML"
-                      onchange="setTimeout(() => {
-                        filter_products();
-                        reorderItems();
-                      }, 500) "
-                      >
+                hx-get="/ecommerce/product/filter_by_provider/"
+                hx-target="[data-field=product]"
+                hx-swap="outerHTML"
+                onchange="setTimeout(() => {
+                  filter_products();
+                  reorderItems();
+                  }, 500) "
+              >
                 <option value="0">----------</option>
-                {% for provider in providers %}  
+                {% for provider in providers %}
                   {% if form.instance.provider == provider %}
                     <option value="{{ provider.pk }}" selected>{{ provider }} </option>
                   {% else %}
@@ -177,10 +177,10 @@
       if (first !== undefined){
         Array.from(document.querySelectorAll('[data-field="product"]'))
           .forEach((item, i) => {
-            item.innerHTML = first.innerHTML
+          item.innerHTML = first.innerHTML
         });
       }
-      
+
     }
 
   </script>

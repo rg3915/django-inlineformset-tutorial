@@ -1,13 +1,14 @@
 from django.db import models
 from django.urls import reverse
 
+
 class Provider(models.Model):
     name = models.CharField('nome', max_length=30, unique=True)
 
     class Meta:
         verbose_name = 'fornecedor'
         verbose_name_plural = 'fornecedores'
-    
+
     def __repr__(self):
         return f'Provider({self.name})'
 

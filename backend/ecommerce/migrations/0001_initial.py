@@ -33,8 +33,10 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.PositiveIntegerField(verbose_name='quantidade')),
                 ('price', models.DecimalField(decimal_places=2, max_digits=7, verbose_name='preço')),
-                ('order', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='order_items', to='ecommerce.order', verbose_name='ordem')),
-                ('product', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='product_items', to='product.product', verbose_name='produto')),
+                ('order', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                 related_name='order_items', to='ecommerce.order', verbose_name='ordem')),
+                ('product', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL,
+                 related_name='product_items', to='product.product', verbose_name='produto')),
             ],
             options={
                 'ordering': ('pk',),
