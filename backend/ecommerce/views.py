@@ -75,11 +75,7 @@ def products_by_provider(request):
 def product_price(request):
     template_name = 'ecommerce/hx/product_price_hx.html'
     url = request.get_full_path()
-    print('url', url)
-    print(url.split('-'))
     item = url.split('-')[1]
-    print('item', item)
-    print('list', list(request.GET.values()))
     product_pk = list(request.GET.values())[0]
     product = Product.objects.get(pk=product_pk)
 
